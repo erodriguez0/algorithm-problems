@@ -1,3 +1,5 @@
+import java.util.Map;
+import java.util.Collections;
 import java.util.Hashtable;
 
 public class FrequentWords {
@@ -6,36 +8,28 @@ public class FrequentWords {
         //String s = "";
         //String s = "north,south,east,west";
 
+        System.out.printf("Most frequent word: %s\n", mostFrequentWord(s));
+    }
+
+    public static String mostFrequentWord(String s) {
         if(s.isBlank()) {
-            System.out.println("String is empty");
-            System.exit(0);
+            return "Empty string";
         }
 
-        String[] words;
-        words = s.split(",");
+        String[] words = s.split(",");
+
+        if(words.length <= 2) {
+            return words[0];
+        }
+
         Hashtable<String, Integer> h = new Hashtable<>();
 
         //Fill hash table
         for(String word : words) {
-            word = word.toLowerCase();
-            if(h.containsKey(word)) {
-                h.replace(word, h.get(word) + 1);
-            } else {
-                h.put(word, 1);
-            }
+            h.put(word, h.getOrDefault(word, 0) + 1);
         }
 
-        //Get max value and key
-        int max = 0;
-        String max_key = "";
-        for(String k : h.keySet()) {
-            if(h.get(k) > max) {
-                max = h.get(k);
-                max_key = k;
-            }
-        }
-
-        System.out.printf("Most frequent word: %s repeated %d time(s)\n", max_key, h.get(max_key));
+        return Collections.max(h.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
     
 }
