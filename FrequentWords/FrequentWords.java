@@ -26,7 +26,7 @@ public class FrequentWords {
 
         //Replace all non-alphanumeric (+ space) characters with whitespace,
         //convert to lowercase, and split words into array
-        String[] words = s.replaceAll("[^a-zA-Z0-9 ]", " ").toLowerCase().split(" ");
+        String[] words = s.replaceAll("[^a-zA-Z0-9 ]", " ").toLowerCase().split("\\s+");
 
         if(words.length <= 2) {
             return words[0];
