@@ -15,6 +15,8 @@ public class FrequentWords {
     }
 
     /**
+     * Find the most frequent words in a string that isn't on the
+     * list of banned words
      *
      * @param s the string with
      * @return the most frequent word in the string
