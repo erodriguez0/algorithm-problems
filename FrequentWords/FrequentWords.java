@@ -1,14 +1,17 @@
-import java.util.Map;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.Map;
+import java.util.HashSet;
+import java.util.Collections;
 
 public class FrequentWords {
     public static void main(String[] args) {
         String s = "north,south,east,west,northwest,northeast,southwest,southeast,north,north,east";
+        String[] banned = {"north"};
         //String s = "";
         //String s = "north,south,east,west";
 
-        System.out.printf("Most frequent word: %s\n", mostFrequentWord(s));
+        System.out.printf("Most frequent word: %s\n", mostFrequentWord(s, banned));
     }
 
     /**
@@ -16,7 +19,7 @@ public class FrequentWords {
      * @param s the string with
      * @return the most frequent word in the string
      */
-    public static String mostFrequentWord(String s) {
+    public static String mostFrequentWord(String s, String[] banned) {
         if(s.isBlank()) {
             return "Empty string";
         }
@@ -30,10 +33,15 @@ public class FrequentWords {
         }
 
         Hashtable<String, Integer> h = new Hashtable<>();
+        //Convert banned words from array to set and words to lowercase
+        HashSet<String> ban = new HashSet<>();
+        Arrays.stream(banned).forEach(bannedWord -> ban.add(bannedWord.toLowerCase()));
 
         //Fill hash table
         for(String word : words) {
-            h.put(word, h.getOrDefault(word, 0) + 1);
+            if(!ban.contains(word)) {
+                h.put(word, h.getOrDefault(word, 0) + 1);
+            }
         }
 
         return Collections.max(h.entrySet(), Map.Entry.comparingByValue()).getKey();
