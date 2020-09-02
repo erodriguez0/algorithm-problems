@@ -20,9 +20,16 @@ public class ContainerWithMostWater {
      */
     public static int maxArea(int[] data) {
         int max = 0, i = 0, j = data.length - 1;
+
+        /**
+         * Use two pointers to iterate through array one at the beginning (i)
+         * and the other in the end (j). If data[i] is smaller then i is incremented
+         * else j is decremented.
+         */
         while(i < j) {
-            //(j - i) = x
-            //min(data[i], data[j]) = y
+            //Area calculation:
+            //x = (j - i)
+            //y = min(data[i], data[j])
             if((j - i) * Math.min(data[i], data[j]) > max) {
                 max = (j - i) * Math.min(data[i], data[j]);
             }
