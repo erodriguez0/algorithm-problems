@@ -11,12 +11,19 @@ public class FrequentWords {
         System.out.printf("Most frequent word: %s\n", mostFrequentWord(s));
     }
 
+    /**
+     *
+     * @param s the string with
+     * @return the most frequent word in the string
+     */
     public static String mostFrequentWord(String s) {
         if(s.isBlank()) {
             return "Empty string";
         }
 
-        String[] words = s.split(",");
+        //Replace all non-alphanumeric (+ space) characters with whitespace,
+        //convert to lowercase, and split words into array
+        String[] words = s.replaceAll("[^a-zA-Z0-9 ]", " ").toLowerCase().split(" ");
 
         if(words.length <= 2) {
             return words[0];
